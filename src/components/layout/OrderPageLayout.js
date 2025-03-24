@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+/*OrderPage*/
+
 export const PizzaContainer = styled.section`
   max-width: 600px;
   margin: 0 auto;
@@ -128,4 +130,9 @@ export const SummaryRow = styled.section`
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 1rem;
+`;
+
+export const Divider = styled.hr`
+  border: none;
+  border-top: 1px solid #292929;
 `;

@@ -1,8 +1,8 @@
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-import { SelectorBox } from '../layout/FormLayout';
-import { SizeSelectorBox } from '../layout/FormLayout';
-import { SizeSelectorQuestion } from '../layout/FormLayout';
-import { SizeOptions } from '../layout/FormLayout';
+import { SelectorBox } from '../layout/OrderPageLayout';
+import { SizeSelectorBox } from '../layout/OrderPageLayout';
+import { SizeSelectorQuestion } from '../layout/OrderPageLayout';
+import { SizeOptions } from '../layout/OrderPageLayout';
 
 export default function SizeSelector({ selectedSize, handleChange }) {
   return (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   FormWrapper,
   SelectorRow,
@@ -10,7 +10,8 @@ import {
   Score,
   Comment,
   Description,
-} from '../components/layout/FormLayout';
+  Divider,
+} from './layout/OrderPageLayout';
 import SizeSelector from './inputs/SizeSelector';
 import ExtraIngredients from './inputs/ExtraIngredients';
 import NameInput from './inputs/NameInput';
@@ -33,6 +34,8 @@ export default function PizzaDetails({
   const [nameTouched, setNameTouched] = useState(false);
   const [orderNote, setOrderNote] = useState('');
   const [count, setCount] = useState(1);
+  const [extraPrice, setExtraPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleChange = (e) => {
     setSelectedSize(e.target.value);
@@ -66,6 +69,14 @@ export default function PizzaDetails({
 
   const handleIncrement = () => setCount((c) => (c < 10 ? c + 1 : 10));
   const handleDecrement = () => setCount((c) => (c > 1 ? c - 1 : 1));
+
+  useEffect(() => {
+    const basePrice = parseFloat(pizzaPrice);
+    const extraPrice = selectedIngredients.length * 5;
+    const total = (basePrice + extraPrice) * count;
+    setExtraPrice(extraPrice);
+    setTotalPrice(total);
+  }, [pizzaPrice, selectedIngredients, count]);
 
   return (
     <>
@@ -103,17 +114,16 @@ export default function PizzaDetails({
           onBlur={() => setNameTouched(true)}
         />
         <OrderNoteInput value={orderNote} onChange={handleOrderNoteChange} />
+
+        <Divider />
+
         <SummaryRow>
           <PizzaCounter
             count={count}
             onIncrement={handleIncrement}
             onDecrement={handleDecrement}
           />
-          <PriceSummaryBox
-            basePrice={pizzaPrice}
-            extraCount={selectedIngredients.length}
-            count={count}
-          />
+          <PriceSummaryBox extraPrice={extraPrice} totalPrice={totalPrice} />
         </SummaryRow>
       </FormWrapper>
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-import { SelectorBox } from '../layout/FormLayout';
-import { CrustQuestion } from '../layout/FormLayout';
+import { SelectorBox } from '../layout/OrderPageLayout';
+import { CrustQuestion } from '../layout/OrderPageLayout';
 
 export default function CrustSelector({ selectedCrust, handleCrustChange }) {
   return (

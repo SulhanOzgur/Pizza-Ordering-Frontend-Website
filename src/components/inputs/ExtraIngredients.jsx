@@ -5,7 +5,7 @@ import {
   ExtraIngredientsCondition,
   ExtraIngredientsSection,
   WarningText,
-} from '../layout/FormLayout';
+} from '../layout/OrderPageLayout';
 
 export default function ExtraIngredients({
   selectedIngredients,

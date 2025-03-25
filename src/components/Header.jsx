@@ -66,7 +66,7 @@ const Current = styled.span`
   color: white;
 `;
 
-export default function Header({ title }) {
+export default function Header() {
   return (
     <HeaderWrapper>
       <HeaderContent>

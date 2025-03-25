@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from 'axios';
 import {
   FormWrapper,
   SelectorRow,
@@ -12,13 +14,13 @@ import {
   Description,
   Divider,
 } from './layout/OrderPageLayout';
-import SizeSelector from './inputs/SizeSelector';
-import ExtraIngredients from './inputs/ExtraIngredients';
+import SizeSelector from './inputs/SizeSelectorInput';
+import ExtraIngredients from './inputs/ExtraIngredientsInput';
 import NameInput from './inputs/NameInput';
 import OrderNoteInput from './inputs/OrderNoteInput';
 import PizzaCounter from '../components/PizzaCounter';
 import PriceSummaryBox from './PriceSummaryBox';
-import CrustSelector from './inputs/CrustSelector';
+import CrustSelector from './inputs/CrustSelectorInput';
 
 export default function PizzaDetails({
   pizzaName,
@@ -37,6 +39,8 @@ export default function PizzaDetails({
   const [extraPrice, setExtraPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [formValid, setFormValid] = useState(false);
+
+  const history = useHistory();
 
   const handleChange = (e) => {
     setSelectedSize(e.target.value);
@@ -89,6 +93,35 @@ export default function PizzaDetails({
     setFormValid(isValid);
   }, [customerName, selectedSize, selectedCrust, selectedIngredients]);
 
+  function handleOrderClick(e) {
+    e.preventDefault();
+
+    if (!formValid) {
+      alert('Form geçerli değil! Sipariş gönderilemedi.');
+      return;
+    }
+
+    const orderData = {
+      name: customerName,
+      size: selectedSize,
+      crust: selectedCrust,
+      ingredients: selectedIngredients,
+      note: orderNote,
+      count: count,
+      totalPrice: totalPrice,
+    };
+
+    axios
+      .post('https://reqres.in/api/pizza', orderData)
+      .then((res) => {
+        console.log('Sunucudan gelen cevap:', res.data);
+        history.push('/success');
+      })
+      .catch((error) => {
+        console.error('Sipariş gönderilirken hata oluştu:', error);
+      });
+  }
+
   return (
     <>
       <FormWrapper>
@@ -138,15 +171,7 @@ export default function PizzaDetails({
             extraPrice={extraPrice}
             totalPrice={totalPrice}
             formValid={formValid}
-            orderData={{
-              name: customerName,
-              size: selectedSize,
-              crust: selectedCrust,
-              ingredients: selectedIngredients,
-              note: orderNote,
-              count: count,
-              totalPrice: totalPrice,
-            }}
+            onOrderClick={handleOrderClick}
           />
         </SummaryRow>
       </FormWrapper>

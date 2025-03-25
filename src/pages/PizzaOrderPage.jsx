@@ -9,7 +9,7 @@ function PizzaOrderPage() {
   const pizza = pizzas[0];
   return (
     <>
-      <Header title="Teknolojik Yemekler" />
+      <Header />
       <PizzaDetails
         pizzaName={pizza.name}
         pizzaPrice={pizza.price}

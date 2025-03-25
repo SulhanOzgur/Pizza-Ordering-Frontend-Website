@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 const Box = styled.div`
   border: 1px solid #ddd;
@@ -77,29 +75,8 @@ export default function PriceSummaryBox({
   extraPrice,
   totalPrice,
   formValid,
-  orderData,
+  onOrderClick,
 }) {
-  const history = useHistory();
-
-  function handleOrderClick(e) {
-    e.preventDefault();
-
-    if (!formValid) {
-      alert('Form geçerli değil! Sipariş gönderilemedi.');
-      return;
-    }
-
-    axios
-      .post('https://reqres.in/api/pizza', orderData)
-      .then((res) => {
-        console.log('Sunucudan gelen cevap:', res.data);
-        history.push('/success');
-      })
-      .catch((error) => {
-        console.error('Sipariş gönderilirken hata oluştu:', error);
-      });
-  }
-
   return (
     <Box>
       <Title>Sipariş Toplamı</Title>
@@ -114,7 +91,7 @@ export default function PriceSummaryBox({
         <Value variant="danger">{totalPrice.toFixed(2)}₺</Value>
       </Row>
 
-      <OrderButton onClick={handleOrderClick} disabled={!formValid}>
+      <OrderButton onClick={onOrderClick} disabled={!formValid}>
         SİPARİŞ VER
       </OrderButton>
     </Box>

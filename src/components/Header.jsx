@@ -10,10 +10,18 @@ const HeaderWrapper = styled.header`
   text-align: center;
   width: 100%;
   margin: 0;
+
+  @media (max-width: 768px) {
+    padding: 10px 0;
+  }
 `;
 
 const Logo = styled.img`
   height: 40px;
+
+  @media (max-width: 768px) {
+    height: 30px;
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -24,6 +32,10 @@ const HeaderContent = styled.div`
 
 const Title = styled.h1`
   display: block;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Breadcrumb = styled.nav`
@@ -31,6 +43,11 @@ const Breadcrumb = styled.nav`
   font-size: 14px;
   margin-top: 40px;
   color: white;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    margin-top: 20px;
+  }
 `;
 
 const StyledLink = styled(Link)`

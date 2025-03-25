@@ -7,6 +7,10 @@ const CounterWrapper = styled.div`
   border-radius: 8px;
   overflow: hidden;
   margin-top: 16px;
+
+  @media (max-width: 768px) {
+    margin-top: 8px;
+  }
 `;
 
 const CounterButton = styled.button`
@@ -22,6 +26,11 @@ const CounterButton = styled.button`
   &:hover {
     background-color: #fdc913;
   }
+
+  @media (max-width: 768px) {
+    padding: 8px 12px;
+    font-size: 16px;
+  }
 `;
 
 const CountDisplay = styled.div`
@@ -31,6 +40,11 @@ const CountDisplay = styled.div`
   font-weight: bold;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+
+  @media (max-width: 768px) {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
 `;
 
 export default function PizzaCounter({ count, onIncrement, onDecrement }) {

@@ -15,11 +15,20 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: start;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 export const Logo = styled.img`
   width: 350px;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    width: 200px;
+    margin-bottom: 1rem;
+  }
 `;
 
 export const Title = styled.h1`
@@ -28,6 +37,10 @@ export const Title = styled.h1`
   text-align: center;
   line-height: 1.3;
   letter-spacing: 2px;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 export const OrderButton = styled(Link)`
@@ -44,5 +57,11 @@ export const OrderButton = styled(Link)`
 
   &:hover {
     opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    padding: 0.8rem 2rem;
   }
 `;

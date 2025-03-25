@@ -36,6 +36,7 @@ export default function PizzaDetails({
   const [count, setCount] = useState(1);
   const [extraPrice, setExtraPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [formValid, setFormValid] = useState(false);
 
   const handleChange = (e) => {
     setSelectedSize(e.target.value);
@@ -77,6 +78,16 @@ export default function PizzaDetails({
     setExtraPrice(extraPrice);
     setTotalPrice(total);
   }, [pizzaPrice, selectedIngredients, count]);
+
+  useEffect(() => {
+    const isValid =
+      customerName.length >= 3 &&
+      selectedSize !== '' &&
+      selectedCrust !== '' &&
+      selectedIngredients.length >= 4;
+
+    setFormValid(isValid);
+  }, [customerName, selectedSize, selectedCrust, selectedIngredients]);
 
   return (
     <>
@@ -123,7 +134,20 @@ export default function PizzaDetails({
             onIncrement={handleIncrement}
             onDecrement={handleDecrement}
           />
-          <PriceSummaryBox extraPrice={extraPrice} totalPrice={totalPrice} />
+          <PriceSummaryBox
+            extraPrice={extraPrice}
+            totalPrice={totalPrice}
+            formValid={formValid}
+            orderData={{
+              name: customerName,
+              size: selectedSize,
+              crust: selectedCrust,
+              ingredients: selectedIngredients,
+              note: orderNote,
+              count: count,
+              totalPrice: totalPrice,
+            }}
+          />
         </SummaryRow>
       </FormWrapper>
     </>

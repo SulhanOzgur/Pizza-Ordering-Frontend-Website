@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios';
 import {
+  BejSection,
+  WhiteSection,
   FormWrapper,
   SelectorRow,
   SummaryRow,
@@ -13,6 +15,7 @@ import {
   Comment,
   Description,
   Divider,
+  ErrorMessage,
 } from './layout/OrderPageLayout';
 import SizeSelector from './inputs/SizeSelectorInput';
 import ExtraIngredients from './inputs/ExtraIngredientsInput';
@@ -40,6 +43,7 @@ export default function PizzaDetails({
   const [extraPrice, setExtraPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [formValid, setFormValid] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const history = useHistory();
 
@@ -103,7 +107,7 @@ export default function PizzaDetails({
     }
 
     const orderData = {
-      name: customerName,
+      name: pizzaName,
       size: selectedSize,
       crust: selectedCrust,
       ingredients: selectedIngredients,
@@ -117,67 +121,77 @@ export default function PizzaDetails({
       .post('https://reqres.in/api/pizza', orderData)
       .then((res) => {
         console.log('Sunucudan gelen cevap:', res.data);
-        setOrderData(orderData);
+        setOrderData({ ...orderData, response: res.data });
         history.push('/success');
       })
       .catch((error) => {
         console.error('Sipariş gönderilirken hata oluştu:', error);
+        setSubmitError(
+          'Sipariş gönderilemedi. Lütfen internet bağlantınızı kontrol edin.'
+        );
       });
   }
 
   return (
     <>
-      <FormWrapper>
-        <PizzaContainer>
-          <PizzaName>{pizzaName}</PizzaName>
-          <InfoLine>
-            <Price>{pizzaPrice}</Price>
-            <Score>{pizzaScore}</Score>
-            <Comment>{pizzaComment}</Comment>
-          </InfoLine>
-          <Description>{pizzaDescription}</Description>
-        </PizzaContainer>
+      <BejSection>
+        <FormWrapper>
+          <PizzaContainer>
+            <PizzaName>{pizzaName}</PizzaName>
+            <InfoLine>
+              <Price>{pizzaPrice}</Price>
+              <Score>{pizzaScore}</Score>
+              <Comment>{pizzaComment}</Comment>
+            </InfoLine>
+            <Description>{pizzaDescription}</Description>
+          </PizzaContainer>
+        </FormWrapper>
+      </BejSection>
 
-        <SelectorRow>
-          <SizeSelector
-            selectedSize={selectedSize}
-            handleSizeChange={handleSizeChange}
+      <WhiteSection>
+        <FormWrapper>
+          <SelectorRow>
+            <SizeSelector
+              selectedSize={selectedSize}
+              handleSizeChange={handleSizeChange}
+            />
+            <CrustSelector
+              selectedCrust={selectedCrust}
+              handleCrustChange={handleCrustChange}
+            />
+          </SelectorRow>
+
+          <ExtraIngredients
+            selectedIngredients={selectedIngredients}
+            handleIngredientChange={handleIngredientChange}
           />
-          <CrustSelector
-            selectedCrust={selectedCrust}
-            handleCrustChange={handleCrustChange}
+
+          <NameInput
+            value={customerName}
+            onChange={handleCustomerNameChange}
+            touched={nameTouched}
+            onBlur={() => setNameTouched(true)}
           />
-        </SelectorRow>
+          <OrderNoteInput value={orderNote} onChange={handleOrderNoteChange} />
 
-        <ExtraIngredients
-          selectedIngredients={selectedIngredients}
-          handleIngredientChange={handleIngredientChange}
-        />
+          <Divider />
 
-        <NameInput
-          value={customerName}
-          onChange={handleCustomerNameChange}
-          touched={nameTouched}
-          onBlur={() => setNameTouched(true)}
-        />
-        <OrderNoteInput value={orderNote} onChange={handleOrderNoteChange} />
-
-        <Divider />
-
-        <SummaryRow>
-          <PizzaCounter
-            count={count}
-            onIncrement={handleIncrement}
-            onDecrement={handleDecrement}
-          />
-          <PriceSummaryBox
-            extraPrice={extraPrice}
-            totalPrice={totalPrice}
-            formValid={formValid}
-            onOrderClick={handleOrderClick}
-          />
-        </SummaryRow>
-      </FormWrapper>
+          <SummaryRow>
+            <PizzaCounter
+              count={count}
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
+            />
+            <PriceSummaryBox
+              extraPrice={extraPrice}
+              totalPrice={totalPrice}
+              formValid={formValid}
+              onOrderClick={handleOrderClick}
+            />
+          </SummaryRow>
+          {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
+        </FormWrapper>
+      </WhiteSection>
     </>
   );
 }

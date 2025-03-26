@@ -14,7 +14,7 @@ const CounterWrapper = styled.div`
 `;
 
 const CounterButton = styled.button`
-  background-color: #fdc913;
+  background-color: #faf7f2;
   border: none;
   padding: 12px 16px;
   font-size: 20px;

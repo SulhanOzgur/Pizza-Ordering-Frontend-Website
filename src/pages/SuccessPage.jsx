@@ -14,8 +14,16 @@ import {
   PizzaCrust,
   PizzaExtraIngredients,
   OrderSummary,
+  SummaryTitle,
   PriceRow,
   TotalAmount,
+  ResponseInfo,
+  ServerText,
+  PizzaDetailLine,
+  DetailLabel,
+  DetailValue,
+  PriceSummaryTitle,
+  DetailRow,
 } from '../components/layout/SuccessPageLayout.js';
 
 export default function SuccessPage({ orderData }) {
@@ -36,17 +44,43 @@ export default function SuccessPage({ orderData }) {
 
       <OrderDetails>
         <OrderName>{orderData.name}</OrderName>
-        <PizzaSize>Boyut: {orderData.size}</PizzaSize>
-        <PizzaCrust>Hamur: {orderData.crust}</PizzaCrust>
-        <PizzaExtraIngredients>
-          Ek Malzemeler: {orderData.ingredients.join(', ')}
-        </PizzaExtraIngredients>
+
+        <DetailRow>
+          <DetailLabel>Boyut:</DetailLabel>
+          <DetailValue>{orderData.size}</DetailValue>
+        </DetailRow>
+
+        <DetailRow>
+          <DetailLabel>Hamur:</DetailLabel>
+          <DetailValue>{orderData.crust}</DetailValue>
+        </DetailRow>
+
+        <DetailRow>
+          <DetailLabel>Ek Malzemeler:</DetailLabel>
+          <DetailValue>{orderData.ingredients.join(', ')}</DetailValue>
+        </DetailRow>
       </OrderDetails>
 
       <OrderSummary>
-        <PriceRow>Seçimler: {orderData.extraPrice}₺</PriceRow>
-        <TotalAmount>Toplam: {orderData.totalPrice}₺</TotalAmount>
+        <PriceSummaryTitle>Sipariş Toplamı</PriceSummaryTitle>
+        <PriceRow>
+          <span>Seçimler</span>
+          <span>{orderData.extraPrice}₺</span>
+        </PriceRow>
+        <TotalAmount>
+          <span>Toplam</span>
+          <span>{orderData.totalPrice}₺</span>
+        </TotalAmount>
       </OrderSummary>
+
+      {orderData.response && (
+        <ResponseInfo>
+          <ServerText>Sipariş ID: {orderData.response.id}</ServerText>
+          <ServerText>
+            Sipariş Tarihi: {orderData.response.createdAt}
+          </ServerText>
+        </ResponseInfo>
+      )}
     </SuccessPageWrapper>
   );
 }

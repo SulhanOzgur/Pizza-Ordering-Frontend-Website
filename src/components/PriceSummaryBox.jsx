@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Box = styled.div`
+  background-color: #faf7f2;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;

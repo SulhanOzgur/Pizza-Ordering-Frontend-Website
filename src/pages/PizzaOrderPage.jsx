@@ -3,21 +3,32 @@ import PizzaDetails from '../components/PizzaDetails.jsx';
 import React from 'react';
 import PizzaListData from '../datas/PizzaListData.js';
 import { useState } from 'react';
+import formBanner from '../../images/iteration-2-images/pictures/form-banner.png';
+import {
+  OrderPageWrapper,
+  BannerWrapper,
+  BannerImage,
+} from '../components/layout/OrderPageLayout.js';
 
 function PizzaOrderPage({ setOrderData }) {
   const [pizzas, setPizzas] = useState(PizzaListData);
   const pizza = pizzas[0];
   return (
     <>
-      <Header />
-      <PizzaDetails
-        pizzaName={pizza.name}
-        pizzaPrice={pizza.price}
-        pizzaScore={pizza.score}
-        pizzaComment={pizza.comment}
-        pizzaDescription={pizza.description}
-        setOrderData={setOrderData}
-      />
+      <OrderPageWrapper>
+        <Header />
+        <BannerWrapper>
+          <BannerImage src={formBanner} alt="Yarım Pizza Banner" />
+        </BannerWrapper>
+        <PizzaDetails
+          pizzaName={pizza.name}
+          pizzaPrice={pizza.price}
+          pizzaScore={pizza.score}
+          pizzaComment={pizza.comment}
+          pizzaDescription={pizza.description}
+          setOrderData={setOrderData}
+        />
+      </OrderPageWrapper>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import Header from '../components/Header.jsx';
 import PizzaDetails from '../components/PizzaDetails.jsx';
 import React from 'react';
-import PizzaListData from '../datas/PizzaListData.js';
+import FoodsDataList from '../datas/FoodsDataList.js';
 import { useState } from 'react';
 import formBanner from '../../images/iteration-2-images/pictures/form-banner.png';
 import {
@@ -9,9 +9,10 @@ import {
   BannerWrapper,
   BannerImage,
 } from '../components/layout/OrderPageLayout.js';
+import Footer from '../components/Footer';
 
 function PizzaOrderPage({ setOrderData }) {
-  const [pizzas, setPizzas] = useState(PizzaListData);
+  const [pizzas, setPizzas] = useState(FoodsDataList);
   const pizza = pizzas[0];
   return (
     <>
@@ -28,6 +29,7 @@ function PizzaOrderPage({ setOrderData }) {
           pizzaDescription={pizza.description}
           setOrderData={setOrderData}
         />
+        <Footer />
       </OrderPageWrapper>
     </>
   );

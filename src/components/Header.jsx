@@ -41,7 +41,7 @@ const Title = styled.h1`
 const Breadcrumb = styled.nav`
   display: flex;
   font-size: 14px;
-  margin-top: 40px;
+  margin-top: 20px;
   color: white;
 
   @media (max-width: 768px) {

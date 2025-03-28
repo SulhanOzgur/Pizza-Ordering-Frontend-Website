@@ -9,8 +9,6 @@ import iconFrenchFries from '../../images/iteration-2-images/icons/4.svg';
 import iconFastFood from '../../images/iteration-2-images/icons/5.svg';
 import iconSoftDrinks from '../../images/iteration-2-images/icons/6.svg';
 
-/* -- STYLED COMPONENTS -- */
-
 const BestMenusWrapper = styled.section`
   max-width: 1800px;
   text-align: center;

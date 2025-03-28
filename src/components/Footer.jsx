@@ -32,18 +32,15 @@ const FooterContainer = styled.div`
   justify-content: space-between;
 `;
 
-/* Her sütun için */
 const Column = styled.div`
   flex: 1;
 `;
 
-/* Logo (isteğe bağlı kullanabilirsiniz) */
 const LogoImage = styled.img`
   width: 150px;
   margin-bottom: 1rem;
 `;
 
-/* Başlıklar */
 const ColumnTitle = styled.h3`
   margin-bottom: 1.5rem;
   font-size: 1.2rem;
@@ -61,13 +58,11 @@ const IconImage = styled.img`
   height: 20px;
 `;
 
-/* Adres vb. metin */
 const AddressText = styled.p`
   margin: 0.4rem 0;
   line-height: 1.4;
 `;
 
-/* Sıccacık Menüler listesi */
 const MenuList = styled.ul`
   list-style: none;
   padding: 0;
@@ -79,7 +74,6 @@ const MenuItem = styled.li`
   margin: 0.4rem 0;
 `;
 
-/* Instagram görsellerini grid halinde göstermek */
 const InstaGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -94,8 +88,9 @@ const InstaImage = styled.img`
   object-fit: cover;
 `;
 
-/* Alt kısım (copyright vb.) */
 const FooterBottom = styled.div`
+  border-top: 1px solid #444;
+  padding-top: 1rem;
   text-align: center;
   margin-top: 2rem;
   font-size: 0.9rem;
@@ -106,29 +101,24 @@ export default function Footer() {
   return (
     <FooterWrapper>
       <FooterContainer>
-        {/* SOL SÜTUN: Logo + Adres Bilgileri */}
         <Column>
-          {/* Eğer logoyu da koymak isterseniz */}
           <LogoImage src={logo} alt="Teknolojik Yemekler" />
           <IconRow>
             <IconImage src={LocationIcon} alt="Location Icon" />
             <AddressText>341 Londonderry Road, İstanbul / Türkiye</AddressText>
           </IconRow>
 
-          {/* E-posta Satırı */}
           <IconRow>
             <IconImage src={EmailIcon} alt="Email Icon" />
             <AddressText>aciktim@teknolojikyemekler.com</AddressText>
           </IconRow>
 
-          {/* Telefon Satırı */}
           <IconRow>
             <IconImage src={TelephoneIcon} alt="Telephone Icon" />
             <AddressText>+90 216 123 45 67</AddressText>
           </IconRow>
         </Column>
 
-        {/* ORTA SÜTUN: "Sıccacık Menüler" Listesi */}
         <Column>
           <ColumnTitle>Sıccacık Menüler</ColumnTitle>
           <MenuList>
@@ -141,7 +131,6 @@ export default function Footer() {
           </MenuList>
         </Column>
 
-        {/* SAĞ SÜTUN: Instagram Fotoğrafları */}
         <Column>
           <ColumnTitle>Instagram</ColumnTitle>
           <InstaGrid>
@@ -155,7 +144,6 @@ export default function Footer() {
         </Column>
       </FooterContainer>
 
-      {/* ALT BÖLÜM (Opsiyonel) */}
       <FooterBottom>
         © 2025 Teknolojik Yemekler. Tüm hakları saklıdır.
       </FooterBottom>

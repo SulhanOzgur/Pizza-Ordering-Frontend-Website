@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-// Data import
 import FoodsDataList from '../datas/FoodsDataList';
+import { Link } from 'react-router-dom';
 
-// Dış sarmalayıcı alan
 const MenuGridWrapper = styled.section`
   max-width: 1200px;
   margin: 0 auto;
@@ -11,7 +10,6 @@ const MenuGridWrapper = styled.section`
   text-align: center;
 `;
 
-// Kartları bir grid halinde dizmek
 const MenuGridContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -20,7 +18,6 @@ const MenuGridContainer = styled.div`
   gap: 1.5rem;
 `;
 
-// Her bir kart
 const MenuCard = styled.div`
   background-color: white;
   border-radius: 10px;
@@ -29,7 +26,6 @@ const MenuCard = styled.div`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 `;
 
-// Kart içindeki resim
 const MenuImage = styled.img`
   width: 100%;
   height: auto;
@@ -61,21 +57,24 @@ const MenuPrice = styled.span`
   color: black;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 export default function MenuItemsGrid() {
   return (
     <MenuGridWrapper>
       <MenuGridContainer>
         {FoodsDataList.map((item) => (
           <MenuCard key={item.id}>
-            {/* Yemek resmi */}
-            <MenuImage src={item.image} alt={item.title} />
-
-            {/* Başlık */}
-            <MenuTitle>{item.name}</MenuTitle>
-
+            <StyledLink to="/order">
+              <MenuImage src={item.image} alt={item.title} />
+              <MenuTitle>{item.name}</MenuTitle>
+            </StyledLink>
             <MenuRow>
               <MenuInfo>{item.score}</MenuInfo>
-              {/* Eğer comment de yan yana olsun istiyorsanız */}
+
               <MenuInfo>{item.comment}</MenuInfo>
               <MenuPrice>{item.price}</MenuPrice>
             </MenuRow>
